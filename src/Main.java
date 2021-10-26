@@ -46,23 +46,43 @@ public class Main {
 				clearBoard();
 				showBoard();
 			}
+			else if (checkTie()) {
+				System.out.println("Game has ended in a tie.");
+				clearBoard();
+				showBoard();
+			}
 		}
 
 	}
 
+	static private boolean checkTie() {
+		
+		for (int i = 0; i < BOARD_SIZE; i++) {
+			for (int j = 0; j < BOARD_SIZE; j++) {
+				if (board[i][j] == '-'){
+					return false;
+				}
+			}
+		}
+		return true;
+		
+	}
+	
 	static private char checkVictory() {
 		
 		int horizontal = 1;
 		int vertical = 1;
 		int diagonal = 1;
-		int backDiagonal = 0;
+		int backDiagonal = 1;
 		
-		for (int i = 0; i < BOARD_SIZE - 1; i++) {
+		// while i < 3 (not checking ahead in the outer loop)
+		for (int i = 0; i < BOARD_SIZE; i++) {
+			// while i < 2 (checking ahead for matches)
 			for (int j = 0; j < BOARD_SIZE - 1; j++) {
-				if (board[i][j] == board[i][j + 1]) {
+				if (board[i][j] == board[i][j + 1] && board[i][j] != '-') {
 					horizontal++;
 				}
-				if (board[j][i] == board[j + 1][i]) {
+				if (board[j][i] == board[j + 1][i] && board[j][i] != '-') {
 					vertical++;
 				}
 			}
@@ -78,7 +98,8 @@ public class Main {
 			if (board[i][i] == board[i + 1][i + 1]) {
 				diagonal++;
 			}
-			if (board[BOARD_SIZE - 1][BOARD_SIZE - 1] == board[BOARD_SIZE - i - 1][BOARD_SIZE - i - 1]) {
+			// 3 - 0 - 1 = 2, or end of array. 3 - 0 - 2 = 1, to look ahead
+			if (board[BOARD_SIZE - i - 1][i] == board[BOARD_SIZE - i - 2][i + 1]) {
 				backDiagonal++;
 			}
 			if (diagonal == BOARD_SIZE || backDiagonal == BOARD_SIZE) {
