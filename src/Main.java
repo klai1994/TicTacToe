@@ -15,7 +15,6 @@ public class Main {
 	static String player2Name;
 	
 	public static void main(String[] args) {	
-		
 		clearBoard();	
 		
 		System.out.println("Player 1 (X), please enter your name.");
@@ -159,6 +158,19 @@ public class Main {
 			}
 			System.out.println();
 		}	
+	}
+	
+	// For testing purposes
+	public static boolean isClear(char[][] board) {
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board.length; j++) {
+				if (board[i][j] != '-') {
+					System.out.println(board[i][j]);
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 }
