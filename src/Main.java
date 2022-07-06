@@ -82,7 +82,7 @@ public class Main {
 				if (board[i][j] == board[i][j + 1] && board[i][j] != '-') {
 					horizontal++;
 				}
-				if (board[j][i] == board[j + 1][i] && board[j][i] != '-') {
+				if (board[BOARD_SIZE - j - 1][i] == board[BOARD_SIZE - j - 2][i] && board[j][i] != '-') {
 					vertical++;
 				}
 			}
@@ -115,9 +115,9 @@ public class Main {
 		while (true) {
 			System.out.println((playerTurn ? player1Name : player2Name) + "'s turn.");
 			
-			System.out.println(String.format("Choose a column (%d-%d).", 1, boardSize));
-			colChoice = scanner.nextInt();
 			System.out.println(String.format("Choose a row (%d-%d).", 1, boardSize));
+			colChoice = scanner.nextInt();
+			System.out.println(String.format("Choose a column (%d-%d).", 1, boardSize));
 			rowChoice = scanner.nextInt();
 			
 			// Check to make sure it is in bounds first
